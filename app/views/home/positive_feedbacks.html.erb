@@ -1,0 +1,43 @@
+<div id="content-wrapper" class="d-flex flex-column mt-4">
+    <div class="content-body">
+        <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                  <div class="card">
+                      <div class="card-body">
+                          <h4 class="card-title">Positive Feedbacks</h4>
+                          <div class="table-responsive">
+                              <table class="table header-border table-hover verticle-middle">
+                                  <thead>
+                                      <tr>
+                                          <th scope="col" style='width: 60%;'>Feedback</th>
+                                          <th scope="col">Positiveness</th>
+                                          <th scope="col">Positiveness Score</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <% @feed_backs.each do |feed_back| %>
+                                        <% value = (feed_back['scores']['pos'] * 100).to_i %>
+                                        <tr>
+                                            <td><%= feed_back['feedback'] %></td>
+                                            <td>
+                                                <div class="progress" style="height: 10px;">
+                                                    <div class="progress-bar gradient-1" style="width: <%= value %>%;" role="progressbar"><span class="sr-only"><%= value %></span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                              <td><span class="label gradient-1 btn-rounded"><%= value%></span>
+                                            </td>
+                                        </tr>
+                                      <% end %>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+        <!-- #/ container -->
+    </div>
+</div>

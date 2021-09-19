@@ -1,0 +1,74 @@
+<div id="content-wrapper" class="d-flex flex-column">
+    <!-- Main Content -->
+    <div id="content">
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <div class="row">
+              <div class='col-md-12'>
+                <canvas id="barchart" style="width:100%;max-width:800px"></canvas>
+              </div>
+              <div class='col-md-12'>
+                <canvas id="piechart" style="width:100%;max-width:800px"></canvas>
+              </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+</div>
+
+<!-- Page level plugins -->
+<script src="/vendor/chart.js/Chart.min.js"></script>
+<!-- Page level custom scripts -->
+<!-- <script src="/js/demo/chart-area-demo.js"></script>
+<script src="/js/demo/chart-pie-demo.js"></script> -->
+
+<script>
+var xValues = ["Positive", "Negative", "Neutral"];
+var yValues = <%= raw @bar_chart_data %>;
+var barColors = ["green", "red", "lightblue"];
+
+new Chart("barchart", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Topic Words Count"
+    }
+  }
+});
+</script>
+
+<script>
+var xValues = <%= raw @pie_chart_x %>;
+var yValues = <%= raw @pie_chart_y %>;
+const length = <%= raw(@pie_chart_x.size) %>;
+var barColors = [];
+for(var i = 0; i < length; i ++) {
+  barColors.push('#' + (0x1000000 + Math.random() * 0xffffff).toString(16).substr(1, 6));
+}
+
+new Chart("piechart", {
+  type: "pie",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "Topic Words Count"
+    }
+  }
+});
+</script>
